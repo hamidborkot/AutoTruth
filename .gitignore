@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+autotruth_env/
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model cache (large files — download via HuggingFace)
+*.safetensors
+*.bin
+*.pt
+*.pth
+models/
+
+# HuggingFace cache
+~/.cache/huggingface/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Intermediate experiment files
+*.tmp
+checkpoints/
