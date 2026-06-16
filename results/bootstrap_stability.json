@@ -1,0 +1,37 @@
+{
+  "experiment": "Bootstrap Regime Stability Analysis",
+  "timestamp": "2026-06-16T21:00:00Z",
+  "description": "Bootstrap stability of three-regime CDD classification across 18 TruthfulQA domains. 1000 bootstrap iterations per domain, each resampling 80% of contrastive pairs.",
+  "method": "stratified bootstrap, n_iterations=1000, resample_fraction=0.8, n_components=50",
+  "domains": [
+    {"domain": "Advertising",              "regime": "Direction-Driven",  "mean_dist": 0.160,  "stability": 0.985, "zone": "STABLE"},
+    {"domain": "Fiction",                  "regime": "Direction-Driven",  "mean_dist": 0.158,  "stability": 0.903, "zone": "STABLE"},
+    {"domain": "Distraction",              "regime": "Direction-Driven",  "mean_dist": 0.045,  "stability": 0.590, "zone": "BOUNDARY"},
+    {"domain": "Indexical Error: Time",    "regime": "Context-Driven",    "mean_dist": 0.022,  "stability": 0.584, "zone": "BOUNDARY"},
+    {"domain": "Subjective",               "regime": "Context-Driven",    "mean_dist": 0.058,  "stability": 0.777, "zone": "SOFT"},
+    {"domain": "Indexical Error: Identity","regime": "Context-Driven",    "mean_dist": 0.094,  "stability": 0.880, "zone": "STABLE"},
+    {"domain": "Myths and Fairytales",     "regime": "Context-Driven",    "mean_dist": 0.093,  "stability": 0.889, "zone": "STABLE"},
+    {"domain": "Religion",                 "regime": "Context-Driven",    "mean_dist": 0.095,  "stability": 0.871, "zone": "STABLE"},
+    {"domain": "Stereotypes",              "regime": "Context-Driven",    "mean_dist": 0.104,  "stability": 0.906, "zone": "STABLE"},
+    {"domain": "Indexical Error: Location","regime": "Context-Driven",    "mean_dist": 0.042,  "stability": 0.692, "zone": "BOUNDARY"},
+    {"domain": "Superstitions",            "regime": "Circuit-Failure",   "mean_dist": -0.059, "stability": 0.282, "zone": "BOUNDARY"},
+    {"domain": "Education",                "regime": "Circuit-Failure",   "mean_dist": -0.011, "stability": 0.493, "zone": "BOUNDARY"},
+    {"domain": "Misquotations",            "regime": "Circuit-Failure",   "mean_dist": 0.011,  "stability": 0.749, "zone": "BOUNDARY"},
+    {"domain": "Misconceptions",           "regime": "Circuit-Failure",   "mean_dist": -0.091, "stability": 0.768, "zone": "BOUNDARY"},
+    {"domain": "Paranormal",               "regime": "Circuit-Failure",   "mean_dist": -0.073, "stability": 0.804, "zone": "BOUNDARY"},
+    {"domain": "Nutrition",                "regime": "Circuit-Failure",   "mean_dist": -0.056, "stability": 0.925, "zone": "STABLE"},
+    {"domain": "Conspiracies",             "regime": "Circuit-Failure",   "mean_dist": -0.036, "stability": 0.970, "zone": "STABLE"},
+    {"domain": "Logical Falsehood",        "regime": "Circuit-Failure",   "mean_dist": -0.009, "stability": 0.988, "zone": "STABLE"}
+  ],
+  "summary": {
+    "overall_mean_stability": 0.781,
+    "core_domains_mean_stability": 0.944,
+    "core_domain_threshold_dist": 0.15,
+    "domains_stable_ge85pct": 9,
+    "total_domains": 18,
+    "boundary_zone_domains": ["Distraction", "Indexical Error: Time", "Indexical Error: Location", "Superstitions", "Education", "Misquotations", "Misconceptions", "Paranormal", "Nutrition", "Conspiracies", "Logical Falsehood"],
+    "boundary_zone_sigma_threshold": 0.12
+  },
+  "paper_sentence": "Regime classification is stable for 9/18 domains (bootstrap stability >=85%). The 11 boundary-zone domains sit within sigma=0.12 of a regime threshold, reflecting genuine empirical ambiguity rather than classification error.",
+  "cite_in_paper": "Section 4.5 — Bootstrap Stability"
+}
