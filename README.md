@@ -203,7 +203,7 @@ Full AAAI 2027 paper draft: [`paper/CDD_Full_Paper_Draft.md`](paper/CDD_Full_Pap
   author    = {Tulla, Md. Hamid Borkot},
   booktitle = {Proceedings of the Forty-First {AAAI} Conference on Artificial Intelligence},
   year      = {2027},
-  address   = {Montr{\'e}al, Canada},
+  address   = {Chongqing, China},
   note      = {AI Alignment Track}
 }
 ```
