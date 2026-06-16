@@ -1,0 +1,70 @@
+{
+  "model": "GPT-2-XL",
+  "dataset": "TruthfulQA",
+  "n_pairs": 200,
+  "n_domains": 22,
+  "circuit": {
+    "n_components": 50,
+    "total_components": 1248,
+    "specificity_ratio": 35.9,
+    "p_value": "<0.0001",
+    "circuit_drop_pct": 546,
+    "random_drop_pct": 15.2,
+    "dominant_component": "L00_MLP",
+    "dominant_ie": 0.811,
+    "architecture": "100% MLP-dominated"
+  },
+  "cdd": {
+    "mean_effective_rank": 57.74,
+    "median_effective_rank": 77.5,
+    "max_effective_rank": 88,
+    "components_rank1": 0,
+    "mean_crr": 23.101,
+    "components_crr_above_070": "100% (50/50)",
+    "top_crr_components": [
+      {"component": "L33H05", "crr": 45.695},
+      {"component": "L27H06", "crr": 45.351},
+      {"component": "L26H06", "crr": 44.719},
+      {"component": "L33H09", "crr": 44.311},
+      {"component": "L30H07", "crr": 43.880}
+    ],
+    "mean_cpa": 0.0666,
+    "mean_probe_accuracy": 0.9145,
+    "h1_confirmed": true,
+    "h1_interpretation": "Probes and circuits measure near-orthogonal structures despite both correlating with truthfulness labels"
+  },
+  "domain_analysis": {
+    "regime_separation_mannwhitney_p": 0.0103,
+    "context_driven_pearson_r": -0.781,
+    "context_driven_pearson_p": 0.038,
+    "regimes": {
+      "Direction-Driven": {
+        "n_domains": 3,
+        "domains": ["Advertising", "Fiction", "Distraction"],
+        "mean_ie": 0.617,
+        "mean_cpa": 0.703,
+        "description": "Universal facts; global causal direction active"
+      },
+      "Context-Driven": {
+        "n_domains": 7,
+        "domains": ["Indexical Error: Time", "Subjective", "Indexical Error: Identity", "Myths and Fairytales", "Religion", "Stereotypes", "Indexical Error: Location"],
+        "mean_ie": 0.686,
+        "mean_cpa": 0.324,
+        "description": "Context-dependent truth; domain-local directions; global direction hurts (r=-0.781)"
+      },
+      "Circuit Failure": {
+        "n_domains": 8,
+        "domains": ["Superstitions", "Education", "Misquotations", "Misconceptions", "Paranormal", "Nutrition", "Conspiracies", "Logical Falsehood"],
+        "mean_ie": 0.149,
+        "mean_cpa": 0.220,
+        "description": "Contested knowledge; no stable causal direction"
+      }
+    }
+  },
+  "paper": {
+    "title": "Causal Direction Decomposition (CDD): Three Mechanistic Regimes of Truthfulness in Large Language Models",
+    "venue": "AAAI 2027",
+    "track": "AI Alignment",
+    "deadline": "2026-07-21"
+  }
+}

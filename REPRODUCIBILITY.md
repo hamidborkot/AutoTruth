@@ -1,163 +1,179 @@
-# Reproducibility Guide — AutoTruth
+# Reproducibility Guide — AutoTruth + CDD
 
-This document provides exact instructions to reproduce every result in the paper from scratch.
+This guide allows any researcher to reproduce every result in the paper
+**"Causal Direction Decomposition (CDD): Three Mechanistic Regimes of Truthfulness in LLMs"**
+from scratch on a single consumer GPU.
 
 ---
 
 ## Environment
 
-| Component | Version Used in Paper |
+| Item | Specification |
 |---|---|
-| OS | Windows 11 / Linux |
-| Python | 3.10+ |
-| PyTorch | 2.11.0+cu128 |
-| Transformers | 4.41.0 |
-| TransformerLens | 1.19+ |
-| CUDA | 12.8 |
-| GPU | NVIDIA RTX 5070 Laptop (8.55 GB VRAM) |
+| GPU | NVIDIA RTX 5070 Laptop, 8.55 GB VRAM |
 | RAM | 16 GB |
-| Random Seed | 42 |
-
----
-
-## Step 1: Setup
+| Python | 3.10+ |
+| CUDA | 12.1 |
+| PyTorch | 2.x |
+| TransformerLens | 1.x |
 
 ```bash
 git clone https://github.com/hamidborkot/AutoTruth.git
 cd AutoTruth
-python -m venv autotruth_env
-source autotruth_env/bin/activate  # Windows: autotruth_env\Scripts\activate
 pip install -r requirements.txt
 ```
 
 ---
 
-## Step 2: Dataset
+## Stage 1 — AutoTruth: Circuit Discovery
 
-TruthfulQA is loaded automatically from HuggingFace — no manual download needed:
-```python
-from datasets import load_dataset
-dataset = load_dataset("truthful_qa", "generation", split="validation")
-# 817 samples, columns: type, category, question, best_answer,
-# correct_answers, incorrect_answers, source
-```
+**Notebook:** `04_patching_loop.ipynb` + `05_scoring_circuit.ipynb`
 
----
-
-## Step 3: Model
-
-GPT-2-XL is loaded automatically via TransformerLens — no HF token required:
-```python
-from transformer_lens import HookedTransformer
-model = HookedTransformer.from_pretrained("gpt2-xl", device="cuda")
-# 48 layers, 25 heads/layer, d_model=1600
-# VRAM usage: ~6.74 GB
-```
-
----
-
-## Step 4: Run Experiments
-
-### Option A — Full Pipeline (Automated)
 ```bash
-python src/run_experiment.py --model gpt2-xl --samples 200 --top_k 50 --seed 42
+python src/run_experiment.py --model gpt2-xl --samples 200 --seed 42 --top_k 50
 ```
-Estimated time: ~5 hours on RTX 5070 (8GB VRAM)
 
-### Option B — Step by Step (Notebooks)
-Run notebooks in this exact order:
+**Expected outputs:**
+```
+Specificity ratio : 35.9×
+p-value           : < 0.0001
+Circuit size      : 50 / 1248 (4.0%)
+Circuit drop      : 546%
+Random drop       : 15.2%
+Dominant component: L00_MLP (IE = 0.811)
+```
 
-| Notebook | Purpose | Est. Time |
+Output files: `results/autotruth_circuit_v2.csv`, `results/autotruth_all_scores_v2.csv`
+
+---
+
+## Stage 2 — Cross-Domain Analysis
+
+**Notebook:** `08_cross_domain.ipynb`
+
+Key expected values: Advertising IE=+1.247, Indexical Time IE=+1.237, Conspiracies IE=−0.019, Logical Falsehood IE=−0.048
+
+Output: `results/autotruth_cross_domain.csv`
+
+---
+
+## Stage 3 — CDD: Contrastive PCA
+
+**Notebook:** `10_cdd_cpca.ipynb`
+
+**Expected outputs:**
+```
+Mean effective rank  : 57.74
+Median effective rank: 77.5
+Max effective rank   : 88
+Components with rank=1: 0/50
+```
+
+Note: High effective rank (57.74) is the correct result, not an error.
+It shows causal variation is distributed across many directions — motivating rank-1 validation.
+
+---
+
+## Stage 4 — CDD: Rank-1 CRR
+
+**Notebook:** `11_cdd_rank1_crr.ipynb`
+
+**Expected outputs:**
+```
+Mean CRR : 23.101
+Components with CRR >= 0.70 : 100.0% (50/50)
+Top component: L33H05 CRR=45.695
+```
+
+Note: CRR > 1.0 is correct — rank-1 patching overshoots full-component IE because
+mean ablation dilutes the causal signal; rank-1 isolation removes this dilution.
+
+---
+
+## Stage 5 — CDD: Probe-Circuit CPA (Central Result)
+
+**Notebook:** `12_cdd_cpa.ipynb`
+
+**Expected outputs:**
+```
+Mean CPA (causal-probe alignment) : 0.0666
+Mean probe accuracy               : 0.9145
+Result: STRONG MISALIGNMENT
+```
+
+**This is H1 confirmed.** CPA = 0.0666 is the paper's central finding — not an error.
+A probe achieving 91.45% accuracy shares only 6.66% directional alignment with the
+causally active direction within the same component.
+
+---
+
+## Stage 6 — CDD: Domain-Conditional Analysis
+
+**Notebook:** `13_cdd_domain_conditional.ipynb`
+
+**Expected outputs (selected):**
+```
+Advertising           IE=+1.247  CPA=0.660
+Fiction               IE=+0.358  CPA=0.811
+Indexical Time        IE=+1.237  CPA=0.202
+Conspiracies          IE=-0.019  CPA=0.216
+Logical Falsehood     IE=-0.048  CPA=0.189
+Global Pearson r = 0.2342, p = 0.3496  (not significant — two regimes mixed)
+```
+
+Note: The global correlation is non-significant intentionally — two regimes with opposite
+relationships are mixed. The structure only emerges in Stage 7.
+
+---
+
+## Stage 7 — CDD: Three-Regime Discovery
+
+**Notebook:** `14_cdd_three_regimes.ipynb`
+
+**Expected outputs:**
+```
+Direction-Driven (n=3): Advertising, Fiction, Distraction
+  Mean IE=0.617, Mean CPA=0.703
+
+Context-Driven (n=7): Indexical Time, Subjective, Identity, Myths, Religion, Stereotypes, Location
+  Mean IE=0.686, Mean CPA=0.324
+  Within-regime r = -0.781, p = 0.038  ← Context-Driven Paradox
+
+Circuit Failure (n=8): Conspiracies, Logical Falsehood, Paranormal, Misconceptions,
+                       Nutrition, Misquotations, Superstitions, Education
+  Mean IE=0.149, Mean CPA=0.220
+
+Mann-Whitney U p = 0.0103  ← Regimes are statistically distinct
+```
+
+---
+
+## Complete Results Summary
+
+| Stage | Key Metric | Value |
 |---|---|---|
-| `01_environment_setup.ipynb` | Install + verify CUDA | 2 min |
-| `02_data_pipeline.ipynb` | Load model + TruthfulQA | 5 min |
-| `03_mean_activations.ipynb` | Compute dataset mean activations | 15 min |
-| `04_patching_loop.ipynb` | **Core experiment** (activation patching) | ~5 hours |
-| `05_scoring_circuit.ipynb` | Score all 1248 components | 1 min |
-| `06_ablation_validation.ipynb` | Mean ablation + t-test | 20 min |
-| `07_anti_circuit.ipynb` | Suppressing subnetwork analysis | 5 min |
-| `08_cross_domain.ipynb` | Per-category breakdown | 15 min |
-| `09_visualizations.ipynb` | Generate all paper figures | 2 min |
+| AutoTruth | Specificity ratio | 35.9× |
+| AutoTruth | p-value | < 0.0001 |
+| AutoTruth | Circuit size | 50/1,248 (4.0%) |
+| cPCA | Mean effective rank | 57.74 |
+| Rank-1 CRR | Mean CRR | 23.101 |
+| Rank-1 CRR | % above 0.70 | 100% |
+| **CPA (H1)** | **Mean CPA** | **0.0666** |
+| CPA | Probe accuracy | 91.45% |
+| Regimes | Mann-Whitney p | 0.0103 |
+| Context-Driven | Pearson r | −0.781 (p=0.038) |
 
 ---
 
-## Step 5: Expected Outputs
+## Common Issues
 
-### results/ directory
-```
-autotruth_all_scores_v2.csv          # 1248 rows, columns: component, type, layer, head, mean_ie, consistency, score
-autotruth_circuit_v2.csv             # 50 rows (top circuit components)
-autotruth_antisuppression_circuit.csv # Suppressing subnetwork
-autotruth_cross_domain.csv           # 22 rows (one per TruthfulQA category)
-autotruth_final_results.json         # Complete results summary
-```
+**CPA near zero:** This is the expected and confirmed result (0.0666).
 
-### figures/ directory
-```
-autotruth_main_figure.png            # 4-panel main figure (300 DPI)
-autotruth_circuit_heatmap_final.png  # Layer x Head heatmap (300 DPI)
-```
+**CRR > 1.0:** This is correct — see Stage 4 note above.
 
----
+**Global domain correlation not significant:** Expected — see Stage 6 note above.
 
-## Step 6: Verify Results
+**Domain categories skipped:** Health (n=2), Proverbs (n=2), Misconceptions: Topical (n=2)
+are excluded due to insufficient pairs. This is a documented limitation in the paper.
 
-Your reproduced results should match within ±2% due to floating-point variance:
-
-| Metric | Paper Value | Acceptable Range |
-|---|---|---|
-| Specificity ratio | 35.9x | 30x – 40x |
-| p-value | <0.0001 | <0.001 |
-| Circuit size | 50 | 45–55 |
-| Circuit drop % | 546% | 400%–650% |
-| Random drop % | 15.2% | 10%–25% |
-| Top component | L00_MLP | L00_MLP |
-
----
-
-## Contrastive Pair Construction
-
-For each TruthfulQA item:
-- **Truthful prompt**: `"Q: {question}\nA: {correct_answers[0]}"`
-- **Hallucinated prompt**: `"Q: {question}\nA: {incorrect_answers[0]}"`
-- Items with empty correct or incorrect answer lists are skipped
-- Maximum sequence length: 128 tokens (truncated)
-
----
-
-## Circuit Scoring Formula
-
-```
-AutoTruth Score = mean_IE × Consistency
-
-where:
-  mean_IE     = mean Indirect Effect across all pairs
-  Consistency = fraction of pairs where IE > 0
-  Circuit     = components with score > mean(all scores) + 1×std(all scores)
-```
-
----
-
-## Ablation Protocol
-
-- **Mean ablation** (not zero ablation): replaces component activation with dataset mean
-- **Circuit ablation**: ablate all 50 circuit components simultaneously
-- **Random ablation**: average of 5 random seeds, each ablating 50 random components
-- **Validation subset**: 50 pairs (stratified from full 200)
-- **Statistical test**: paired two-sided t-test (baseline LD vs circuit ablation LD)
-
----
-
-## Known Issues & Notes
-
-1. **Zero ablation gives incorrect results** (5327% drop) — always use mean ablation
-2. **Patching direction matters** — patch corrupt→clean activation in clean run (not clean→corrupt)
-3. **Session interruptions**: the patching loop (Cell 9) takes ~5 hours; use VS Code autosave or checkpoint every 50 pairs
-4. **VRAM**: with 8.55 GB, VRAM usage peaks at ~8.1 GB during patching — close other GPU processes
-
----
-
-## Contact
-
-For reproducibility issues, open a GitHub Issue at:
-https://github.com/hamidborkot/AutoTruth/issues
+**CUDA OOM:** Ensure no other GPU processes are running. Patching runs one component at a time by default.
