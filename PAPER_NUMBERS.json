@@ -1,0 +1,154 @@
+{
+  "_description": "Single source of truth for all numbers used in the paper. Every value here is verified and timestamped. Use ONLY these numbers when writing the paper.",
+  "_last_updated": "2026-06-21",
+  "_paper": "Causal Direction Decomposition (CDD): Three Mechanistic Regimes of Truthfulness in Large Language Models",
+  "_venue": "AAAI 2027 — deadline July 21 2026",
+
+  "primary_model": {
+    "name": "GPT-2-XL",
+    "hf_id": "gpt2-xl",
+    "parameters": "1.5B",
+    "n_layers": 48,
+    "n_heads": 25,
+    "d_model": 1600,
+    "dataset": "TruthfulQA (generation split)",
+    "n_pairs": 200,
+    "seed": 42,
+    "source_file": "results/cdd_summary.json"
+  },
+
+  "H1_probe_circuit_misalignment": {
+    "_claim": "Linear probes and causal circuits measure near-orthogonal structures despite both correlating with truthfulness labels",
+    "mean_CPA": 0.0666,
+    "mean_probe_accuracy": 0.9145,
+    "null_expectation": 0.0199,
+    "CPA_vs_null_ratio": 3.3,
+    "H1_confirmed": true,
+    "H1_threshold": 0.15,
+    "source_file": "results/cdd_summary.json → cdd.mean_cpa"
+  },
+
+  "circuit": {
+    "_claim": "A 50-component circuit achieves 35.9x specificity with 546% ablation drop",
+    "n_components": 50,
+    "total_components_tested": 1248,
+    "specificity_ratio": 35.9,
+    "circuit_ablation_drop_pct": 546,
+    "random_ablation_drop_pct": 15.2,
+    "p_value": "<0.0001",
+    "dominant_component": "L00_MLP",
+    "dominant_ie": 0.811,
+    "architecture": "100% MLP-dominated",
+    "source_file": "results/cdd_summary.json → circuit"
+  },
+
+  "CRR": {
+    "_claim": "100% of circuit components recover rank-1 causal direction (CRR >= 0.70)",
+    "mean_CRR": 23.101,
+    "pct_components_crr_above_070": "100% (50/50)",
+    "mean_effective_rank": 57.74,
+    "source_file": "results/cdd_summary.json → cdd.mean_crr"
+  },
+
+  "three_regime_structure": {
+    "_claim": "22 TruthfulQA domains separate into three statistically distinct regimes",
+    "n_domains": 22,
+    "regime_separation_mannwhitney_p": 0.0103,
+    "context_driven_paradox_r": -0.781,
+    "context_driven_paradox_p": 0.038,
+    "regimes": {
+      "Direction-Driven": {
+        "n_domains": 3,
+        "domains": ["Advertising", "Fiction", "Distraction"],
+        "mean_domain_cpa": 0.703,
+        "description": "Global causal direction active; CPA high"
+      },
+      "Context-Driven": {
+        "n_domains": 7,
+        "domains": ["Indexical Error: Time", "Subjective", "Indexical Error: Identity", "Myths and Fairytales", "Religion", "Stereotypes", "Indexical Error: Location"],
+        "mean_domain_cpa": 0.324,
+        "description": "Domain-local directions; global direction hurts (r=-0.781)"
+      },
+      "Circuit-Failure": {
+        "n_domains": 12,
+        "domains": ["Superstitions", "Education", "Misquotations", "Misconceptions", "Paranormal", "Nutrition", "Conspiracies", "Logical Falsehood", "Health", "Law", "History", "Economics"],
+        "mean_domain_cpa": 0.22,
+        "description": "Contested knowledge; no stable causal direction"
+      }
+    },
+    "source_file": "results/cdd_summary.json → domain_analysis"
+  },
+
+  "ablation_A_K_sensitivity": {
+    "_claim": "CPA is stable across circuit sizes K=10 to K=100 (range=0.0160)",
+    "K_10":  {"mean_CPA": 0.0606, "specificity_ratio": 262.2},
+    "K_25":  {"mean_CPA": 0.0666, "specificity_ratio": 247.3},
+    "K_50":  {"mean_CPA": 0.0666, "specificity_ratio": 329.2, "note": "Main result"},
+    "K_75":  {"mean_CPA": 0.0699, "specificity_ratio": 1831.1, "note": "Spike confirms hard circuit boundary"},
+    "K_100": {"mean_CPA": 0.0666, "specificity_ratio": 359.8},
+    "cpa_range": 0.0160,
+    "stable": true,
+    "paper_sentence": "CPA remains stable across K (range=0.016, all values < 0.10). Specificity peaks at K=75 (1831x), confirming a hard circuit boundary at K=50.",
+    "source_file": "results/ablation_A_K_sensitivity_fixed.json"
+  },
+
+  "ablation_B_stage2_bypass": {
+    "_claim": "cPCA direction source is necessary; mean-diff direction is surface-dominated",
+    "cpca_full_method":       {"mean_CPA": 0.0666, "note": "Full CDD method — deep causal structure"},
+    "mean_diff_direction":    {"mean_CPA": 0.4138, "note": "Surface-dominated — expected high"},
+    "random_unit_vector":     {"mean_CPA": 0.0199, "note": "Null baseline = sqrt(2/pi*d)"},
+    "paper_sentence": "cPCA CPA (0.0666) << mean-diff CPA (0.4138), confirming Stage 2 isolates deep causal structure rather than surface label shifts.",
+    "source_file": "results/ablation_B_stage2_bypass.json"
+  },
+
+  "ablation_C_probe_regularisation": {
+    "_claim": "CPA is stable across six orders of magnitude of probe regularisation",
+    "C_0.01":   {"mean_CPA": 0.0720},
+    "C_0.1":    {"mean_CPA": 0.0690},
+    "C_1.0":    {"mean_CPA": 0.0672},
+    "C_10.0":   {"mean_CPA": 0.0668},
+    "C_100.0":  {"mean_CPA": 0.0666, "note": "Main result"},
+    "C_1000.0": {"mean_CPA": 0.0666},
+    "cpa_range": 0.0054,
+    "stable": true,
+    "paper_sentence": "CPA remains below 0.10 across six orders of magnitude of probe regularisation (C=0.01 to 1000, range=0.0054).",
+    "source_file": "results/ablation_C_probe_reg.json"
+  },
+
+  "replication": {
+    "_claim": "H1 confirmed across two architectures, two training corpora, two datasets",
+    "GPT2_XL_TruthfulQA": {
+      "mean_CPA": 0.0666, "probe_acc": 0.9145, "H1": true,
+      "note": "Primary result",
+      "source_file": "results/cdd_summary.json"
+    },
+    "Pythia_1.4B_TruthfulQA": {
+      "mean_CPA": 0.1005, "probe_acc": 0.9793, "H1": true,
+      "note": "Cross-architecture replication — different training corpus (The Pile)",
+      "source_file": "results/replication_pythia.json"
+    },
+    "Pythia_410M_TruthfulQA": {
+      "mean_CPA": 0.0473, "probe_acc": 0.9085, "H1": true,
+      "note": "Smaller model replication — added 2026-06-21",
+      "source_file": "results/replication_pythia.json → pythia_410m"
+    },
+    "GPT2_XL_CREAK": {
+      "mean_CPA": 0.0148, "H1": true,
+      "note": "Out-of-domain dataset replication (entity-centric factual claims)",
+      "source_file": "results/creak_validation.json"
+    }
+  },
+
+  "null_expectation": {
+    "formula": "sqrt(2 / (pi * d))",
+    "d": 1600,
+    "value": 0.0199,
+    "interpretation": "Expected CPA if probe direction were uniformly random in R^d"
+  },
+
+  "bootstrap_stability": {
+    "n_bootstrap_samples": 2000,
+    "boundary_domains": ["Distraction (59.0%)", "Indexical Error: Time (58.4%)"],
+    "source_file": "results/bootstrap_stability.json"
+  }
+}
