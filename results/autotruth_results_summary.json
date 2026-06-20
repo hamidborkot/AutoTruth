@@ -1,0 +1,16 @@
+{
+  "model": "gpt2-xl",
+  "n_samples": 20,
+  "baseline_ld": 0.1643,
+  "circuit_abl_ld": -8.5894,
+  "random_abl_ld": 0.0299,
+  "circuit_drop_pct": 5327.04,
+  "random_drop_pct": 81.77,
+  "top_5_circuit": [
+    "L00_MLP",
+    "L07_MLP",
+    "L09_MLP",
+    "L06_MLP",
+    "L08_MLP"
+  ]
+}

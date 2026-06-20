@@ -1,0 +1,38 @@
+[
+  {
+    "C": 0.01,
+    "mean_CPA": 0.1648,
+    "std_CPA": 0.1464,
+    "n_components": 50
+  },
+  {
+    "C": 0.1,
+    "mean_CPA": 0.0976,
+    "std_CPA": 0.0976,
+    "n_components": 50
+  },
+  {
+    "C": 1.0,
+    "mean_CPA": 0.0726,
+    "std_CPA": 0.0798,
+    "n_components": 50
+  },
+  {
+    "C": 10.0,
+    "mean_CPA": 0.0694,
+    "std_CPA": 0.0766,
+    "n_components": 50
+  },
+  {
+    "C": 100.0,
+    "mean_CPA": 0.0666,
+    "std_CPA": 0.0784,
+    "n_components": 50
+  },
+  {
+    "C": 1000.0,
+    "mean_CPA": 0.0657,
+    "std_CPA": 0.0791,
+    "n_components": 50
+  }
+]

@@ -1,0 +1,2 @@
+model,n_layers,mid_layer,hidden_dim,mean_cpa,std_cpa,mean_probe_accuracy,h1_confirmed,elapsed_sec
+gpt2-xl,48,24,1600,0.0198,0.0142,0.665,True,402.9

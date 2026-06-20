@@ -1,35 +1,12 @@
 {
-  "experiment": "Cross-Dataset Validation — CREAK Entity-Centric Claims",
-  "timestamp": "2026-06-16T21:30:00Z",
-  "description": "Cross-dataset validation of CPA on CREAK (entity-centric real-world claims about Wikipedia entities), using Pythia-1.4B. Tests whether probe-circuit misalignment is dataset-specific or structural.",
-  "dataset": {
-    "name": "CREAK",
-    "hf_id": "amydeng2000/CREAK",
-    "train_size": 10176,
-    "validation_size": 1371,
-    "fields": ["ex_id", "sentence", "explanation", "label", "entity", "en_wiki_pageid", "entity_mention_loc"],
-    "unique_entities_used": 2096,
-    "n_contrastive_pairs": 200,
-    "pair_construction": "same-entity contrastive pairs: one true claim, one false claim per Wikipedia entity"
-  },
-  "model": {
-    "name": "Pythia-1.4B-deduped",
-    "hf_model_id": "EleutherAI/pythia-1.4b-deduped"
-  },
-  "results": {
-    "mean_cpa": 0.0148,
-    "mean_probe_accuracy": 0.9791,
-    "n_components": 50,
-    "tokenized_shape": [200, 36],
-    "h1_confirmed": true,
-    "h1_threshold": 0.15
-  },
-  "cross_dataset_comparison": {
-    "TruthfulQA_GPT2XL_cpa": 0.0666,
-    "TruthfulQA_Pythia_cpa": 0.1005,
-    "CREAK_Pythia_cpa": 0.0148
-  },
-  "interpretation": "CREAK CPA=0.0148 is the strongest near-zero result across all experiments. A probe with 97.91% accuracy points in a direction ~98.5% orthogonal to the causal circuit direction. This confirms probe-circuit misalignment is a structural property of transformer truthfulness computation, not a model or dataset artifact.",
-  "paper_sentence": "CPA~0 transfers to a second benchmark (CREAK entity-centric claims: CPA=0.0148), confirming that probe-circuit misalignment is a structural property of transformer truthfulness computation, not a model or dataset artifact.",
-  "cite_in_paper": "Section 4.7 — Generalizability"
+  "TruthfulQA_GPT2XL_CPA": 0.0666,
+  "TruthfulQA_Pythia_CPA": 0.1005,
+  "CREAK_Pythia_CPA": 0.0148,
+  "TruthfulQA_GPT2XL_acc": 0.9145,
+  "TruthfulQA_Pythia_acc": 0.9793,
+  "CREAK_Pythia_acc": 0.9791,
+  "h1_replicated": true,
+  "n_pairs_creak": 200,
+  "dataset": "amydeng2000/CREAK",
+  "seed": 42
 }

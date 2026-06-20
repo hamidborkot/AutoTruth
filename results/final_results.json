@@ -1,0 +1,60 @@
+{
+  "model": "gpt2-xl",
+  "replication_model": "EleutherAI/pythia-1.4b",
+  "n_samples": 200,
+  "n_categories": 22,
+  "dataset": "TruthfulQA (generation split)",
+  "circuit_size": 50,
+  "total_components": 1248,
+  "sparsity_pct": 4.01,
+  "n_mlp_circuit": 31,
+  "n_attn_circuit": 19,
+  "top_5_circuit": [
+    "L00_MLP",
+    "L41_MLP",
+    "L32_MLP",
+    "L43_MLP",
+    "L36_MLP"
+  ],
+  "baseline_ld_mean": 0.1779,
+  "baseline_ld_std": 0.6573,
+  "circuit_abl_ld_mean": -0.7933,
+  "random_abl_ld_mean": 0.1508,
+  "circuit_drop_pct": 546.01,
+  "random_drop_pct": 15.21,
+  "circuit_drop_CI_95": [
+    435.66,
+    661.9
+  ],
+  "specificity_ratio": 35.89,
+  "attn_only_drop_pct": 125.76,
+  "mlp_only_drop_pct": 555.51,
+  "early_layer_drop_pct": 983.39,
+  "late_layer_drop_pct": 216.45,
+  "K_ablation": {
+    "10": -2.5981428623199463,
+    "20": -2.3332542419433593,
+    "30": -0.8297387599945069,
+    "50": -1.0232201099395752,
+    "80": -0.8597769260406494
+  },
+  "mannwhitney_p": 8.046443160371733e-09,
+  "paired_ttest_p": 1.3054396908167044e-14,
+  "pearson_r_score_vs_ie": 0.9994,
+  "pearson_p": 0.0,
+  "bootstrap_n": 2000,
+  "mean_CPA_gpt2xl": 0.0666,
+  "mean_probe_acc": 0.9145,
+  "mean_CPA_pythia14b": 0.1197,
+  "pearson_r_domain": 0.2659,
+  "pearson_p_domain": 0.2861975327011087,
+  "mean_regime_stability": 82.0,
+  "best_category": "Advertising",
+  "worst_category": "Health",
+  "regime_counts": {
+    "Circuit Failure": 10,
+    "Direction-Driven": 4,
+    "Context-Driven": 4,
+    "Unknown": 4
+  }
+}

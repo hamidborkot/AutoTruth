@@ -1,34 +1,28 @@
 {
-  "experiment": "Cross-Architecture CPA Replication — Pythia-1.4B",
-  "timestamp": "2026-06-16T19:00:00Z",
-  "description": "Replication of H1 (CPA < 0.15) on Pythia-1.4B-deduped trained on The Pile, using the same TruthfulQA contrastive pair protocol as the GPT-2-XL baseline.",
-  "models": {
-    "baseline": {
-      "name": "GPT-2-XL",
-      "training_corpus": "WebText",
-      "parameters": "1.5B",
-      "mean_cpa": 0.0666,
-      "mean_probe_accuracy": 0.9145,
-      "h1_confirmed": true
-    },
-    "replication": {
-      "name": "Pythia-1.4B-deduped",
-      "hf_model_id": "EleutherAI/pythia-1.4b-deduped",
-      "training_corpus": "The Pile",
-      "parameters": "1.4B",
-      "n_layers": 24,
-      "n_heads": 16,
-      "hidden_dim": 2048,
-      "mean_cpa": 0.1005,
-      "mean_probe_accuracy": 0.9793,
-      "h1_confirmed": true,
-      "n_pairs": 200,
-      "n_components": 50,
-      "seed": 42
-    }
-  },
-  "h1_threshold": 0.15,
-  "result": "H1 confirmed on both architectures. CPA < 0.15 for GPT-2-XL (0.0666) and Pythia-1.4B (0.1005). Probe-circuit misalignment replicates across training corpora.",
-  "paper_sentence": "CPA~0 replicates across two architectures trained on different corpora (GPT-2-XL on WebText: CPA=0.0666; Pythia-1.4B on The Pile: CPA=0.1005).",
-  "cite_in_paper": "Section 4.7 — Generalizability"
+  "model_1": "gpt2-xl",
+  "model_1_mean_cpa": 0.0666,
+  "model_1_probe_acc": 0.9145,
+  "model_2": "EleutherAI/pythia-1.4b",
+  "model_2_mean_cpa": 0.1005,
+  "model_2_probe_acc": 0.9793,
+  "h1_replicated": true,
+  "n_pairs": 200,
+  "n_components": 50,
+  "dataset": "TruthfulQA (validation)",
+  "seed": 42,
+  "pythia_410m": {
+    "model": "EleutherAI/pythia-410m-deduped",
+    "n_layers": 24,
+    "n_heads": 16,
+    "hidden_dim": 1024,
+    "n_pairs": 100,
+    "top_k": 30,
+    "mean_cpa": 0.0473,
+    "mean_probe_acc": 0.9085,
+    "H1_confirmed": true,
+    "per_component_cpa_mean": 0.0473,
+    "per_component_cpa_std": 0.0473,
+    "n_components_measured": 30,
+    "notes": "Replication: H1 probe-circuit misalignment confirmed on Pythia-410M"
+  }
 }

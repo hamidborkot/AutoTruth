@@ -1,0 +1,29 @@
+{
+  "model": "gpt2-xl",
+  "n_samples": 200,
+  "baseline_ld": 1.0536,
+  "circuit_abl_ie_drop": -0.1457,
+  "random_abl_ie_drop": -0.1039,
+  "specificity_ratio": 1.4,
+  "circuit_size": 50,
+  "total_components": 1248,
+  "sparsity_pct": 4.01,
+  "anti_circuit_size": 20,
+  "top_5_promoting": [
+    "L37_MLP",
+    "L36_MLP",
+    "L35H16",
+    "L22H12",
+    "L38_MLP"
+  ],
+  "top_5_suppressing": [
+    "L00_MLP",
+    "L46_MLP",
+    "L13_MLP",
+    "L18_MLP",
+    "L29_MLP"
+  ],
+  "n_categories": 22,
+  "best_category": "Advertising",
+  "worst_category": "Health"
+}

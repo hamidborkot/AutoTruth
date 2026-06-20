@@ -1,0 +1,2 @@
+model,K,mean_cpa,std_cpa,mean_probe_acc,mean_crr,mean_effective_rank,n_components
+gpt2-xl,50,0.0315,0.0154,1.0,-1042190.3062,79.52,25

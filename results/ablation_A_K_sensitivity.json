@@ -1,0 +1,42 @@
+[
+  {
+    "K": 10,
+    "mean_CPA": 0.0224,
+    "std_CPA": 0.0142,
+    "specificity_ratio": 264.02,
+    "n_valid_CPA": 10,
+    "is_main": false
+  },
+  {
+    "K": 25,
+    "mean_CPA": 0.0345,
+    "std_CPA": 0.0312,
+    "specificity_ratio": 248.06,
+    "n_valid_CPA": 25,
+    "is_main": false
+  },
+  {
+    "K": 50,
+    "mean_CPA": 0.0666,
+    "std_CPA": 0.0784,
+    "specificity_ratio": 329.22,
+    "n_valid_CPA": 50,
+    "is_main": true
+  },
+  {
+    "K": 75,
+    "mean_CPA": 0.0666,
+    "std_CPA": 0.0784,
+    "specificity_ratio": 1847.25,
+    "n_valid_CPA": 50,
+    "is_main": false
+  },
+  {
+    "K": 100,
+    "mean_CPA": 0.0666,
+    "std_CPA": 0.0784,
+    "specificity_ratio": 357.32,
+    "n_valid_CPA": 50,
+    "is_main": false
+  }
+]

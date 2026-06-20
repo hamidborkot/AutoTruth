@@ -1,0 +1,15 @@
+{
+  "model": "EleutherAI/pythia-410m-deduped",
+  "n_pairs": 200,
+  "n_components": 50,
+  "seed": 42,
+  "mid_layer": 12,
+  "n_layers": 24,
+  "hidden_dim": 1024,
+  "mean_cpa": 0.0297,
+  "std_cpa": 0.0198,
+  "mean_probe_accuracy": 0.6725,
+  "h1_confirmed": true,
+  "h1_threshold": 0.15,
+  "device": "cuda"
+}

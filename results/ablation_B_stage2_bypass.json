@@ -1,0 +1,17 @@
+{
+  "cPCA \u2014 CDD Stage 2 (full method)": {
+    "mean_CPA": 0.0666,
+    "std_CPA": 0.0784,
+    "n_components": 50
+  },
+  "Mean-difference direction": {
+    "mean_CPA": 0.4357,
+    "std_CPA": 0.1208,
+    "n_components": 50
+  },
+  "Random unit vector (null)": {
+    "mean_CPA": 0.061,
+    "std_CPA": 0.0673,
+    "n_components": 50
+  }
+}

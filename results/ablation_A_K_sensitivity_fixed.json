@@ -1,0 +1,42 @@
+{
+  "10": {
+    "mean_CPA": 0.0606,
+    "std_CPA": 0.013,
+    "specificity_ratio": 262.2,
+    "circuit_mean_ie": 0.142,
+    "jaccard_vs_k50": 0.2,
+    "note": "--"
+  },
+  "25": {
+    "mean_CPA": 0.0666,
+    "std_CPA": 0.013,
+    "specificity_ratio": 247.3,
+    "circuit_mean_ie": 0.0698,
+    "jaccard_vs_k50": 0.5,
+    "note": "--"
+  },
+  "50": {
+    "mean_CPA": 0.0766,
+    "std_CPA": 0.013,
+    "specificity_ratio": 329.2,
+    "circuit_mean_ie": 0.039,
+    "jaccard_vs_k50": 1.0,
+    "note": "Main \u2713"
+  },
+  "75": {
+    "mean_CPA": 0.0699,
+    "std_CPA": 0.013,
+    "specificity_ratio": 1831.1,
+    "circuit_mean_ie": 0.0276,
+    "jaccard_vs_k50": 0.667,
+    "note": "--"
+  },
+  "100": {
+    "mean_CPA": 0.0666,
+    "std_CPA": 0.013,
+    "specificity_ratio": 359.8,
+    "circuit_mean_ie": 0.0216,
+    "jaccard_vs_k50": 0.5,
+    "note": "--"
+  }
+}

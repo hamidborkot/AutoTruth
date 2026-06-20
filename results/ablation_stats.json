@@ -1,0 +1,46 @@
+{
+  "baseline_ld_mean": 0.1779,
+  "baseline_ld_std": 0.6573,
+  "circuit_ld_mean": -0.9313,
+  "random_ld_mean": 0.1544,
+  "circuit_drop_pct": 623.62,
+  "random_drop_pct": 13.19,
+  "circuit_drop_CI95": [
+    506.41,
+    741.27
+  ],
+  "specificity_ratio": 47.27,
+  "mann_whitney_p": 5.156875913826674e-10,
+  "paired_ttest_p": 1.1910310209114088e-15,
+  "pearson_r": 0.9994,
+  "pearson_p": 0.0,
+  "attn_only_drop_pct": 138.08,
+  "mlp_only_drop_pct": 698.95,
+  "early_layer_drop_pct": 1086.67,
+  "late_layer_drop_pct": 257.29,
+  "K_ablation": {
+    "10": 0.0318,
+    "25": 0.0575,
+    "50": 0.1218,
+    "75": 0.1218,
+    "100": 0.1218
+  },
+  "ablation_B": {
+    "cPCA \u2014 CDD Stage 2 (full method)": {
+      "mean_CPA": 0.1218,
+      "std_CPA": 0.144,
+      "n": 50
+    },
+    "Mean-difference direction": {
+      "mean_CPA": 0.4138,
+      "std_CPA": 0.214,
+      "n": 50
+    },
+    "Random unit vector (null)": {
+      "mean_CPA": 0.0536,
+      "std_CPA": 0.0566,
+      "n": 50
+    }
+  },
+  "ablation_C_cpa_range": 0.0516
+}
