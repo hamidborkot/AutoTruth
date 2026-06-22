@@ -1,4 +1,5 @@
 {
+  "_description": "Bootstrap stability results over 2000 iterations per domain. boundary_dist is the signed Euclidean distance from the domain centroid (IE_d, CPA_d) to the nearest regime boundary (Eq. regime in paper). Negative values indicate the centroid lies outside the nominal regime boundary — i.e. the domain sits in direction-reversal territory (IE < 0) and is assigned Circuit Failure precisely because it crosses that boundary. zone field: CORE = stability >= 90% AND |boundary_dist| > 0.09; STABLE = stability >= 77% OR |boundary_dist| > 0.09; BOUNDARY = stability < 77% or |boundary_dist| <= 0.09.",
   "Advertising": {
     "regime": "Direction-Driven",
     "stability_pct": 98.5,
@@ -67,7 +68,7 @@
     "regime": "Context-Driven",
     "stability_pct": 90.6,
     "boundary_dist": 0.104,
-    "zone": "STABLE",
+    "zone": "CORE",
     "mean_ie": 0.51,
     "domain_CPA": 0.284
   },
@@ -83,6 +84,7 @@
     "regime": "Circuit Failure",
     "stability_pct": 28.2,
     "boundary_dist": -0.059,
+    "boundary_dist_note": "negative = centroid lies in direction-reversal territory (IE < 0), firmly assigned Circuit Failure",
     "zone": "BOUNDARY",
     "mean_ie": 0.384,
     "domain_CPA": 0.239
@@ -91,6 +93,7 @@
     "regime": "Circuit Failure",
     "stability_pct": 49.3,
     "boundary_dist": -0.011,
+    "boundary_dist_note": "negative = centroid lies in direction-reversal territory (IE < 0), firmly assigned Circuit Failure",
     "zone": "BOUNDARY",
     "mean_ie": 0.381,
     "domain_CPA": 0.191
@@ -107,7 +110,8 @@
     "regime": "Circuit Failure",
     "stability_pct": 76.8,
     "boundary_dist": -0.091,
-    "zone": "BOUNDARY",
+    "boundary_dist_note": "negative = centroid lies in direction-reversal territory (IE < 0), firmly assigned Circuit Failure",
+    "zone": "STABLE",
     "mean_ie": 0.121,
     "domain_CPA": 0.271
   },
@@ -115,7 +119,8 @@
     "regime": "Circuit Failure",
     "stability_pct": 80.4,
     "boundary_dist": -0.073,
-    "zone": "BOUNDARY",
+    "boundary_dist_note": "negative = centroid lies in direction-reversal territory (IE < 0), firmly assigned Circuit Failure",
+    "zone": "STABLE",
     "mean_ie": 0.114,
     "domain_CPA": 0.253
   },
@@ -123,7 +128,8 @@
     "regime": "Circuit Failure",
     "stability_pct": 92.5,
     "boundary_dist": -0.056,
-    "zone": "BOUNDARY",
+    "boundary_dist_note": "negative = centroid lies in direction-reversal territory (IE < 0), firmly assigned Circuit Failure",
+    "zone": "CORE",
     "mean_ie": 0.038,
     "domain_CPA": 0.236
   },
@@ -131,7 +137,8 @@
     "regime": "Circuit Failure",
     "stability_pct": 97.0,
     "boundary_dist": -0.036,
-    "zone": "BOUNDARY",
+    "boundary_dist_note": "negative = centroid lies in direction-reversal territory (IE < 0), firmly assigned Circuit Failure",
+    "zone": "CORE",
     "mean_ie": -0.019,
     "domain_CPA": 0.216
   },
@@ -139,7 +146,8 @@
     "regime": "Circuit Failure",
     "stability_pct": 98.8,
     "boundary_dist": -0.009,
-    "zone": "BOUNDARY",
+    "boundary_dist_note": "negative = centroid lies in direction-reversal territory (IE < 0), firmly assigned Circuit Failure",
+    "zone": "CORE",
     "mean_ie": -0.048,
     "domain_CPA": 0.189
   }
