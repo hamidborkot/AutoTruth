@@ -242,10 +242,10 @@ Full AAAI 2027 paper draft: [`paper/CDD_Full_Paper_Draft.md`](paper/CDD_Full_Pap
 @inproceedings{tulla2027cdd,
   title     = {Causal Direction Decomposition ({CDD}): Three Mechanistic Regimes
                of Truthfulness in Large Language Models},
-  author    = {Tulla, Md. Hamid Borkot},
+  author    = {},
   booktitle = {Proceedings of the Forty-First {AAAI} Conference on Artificial Intelligence},
   year      = {2027},
-  address   = {Chongqing, China},
+  address   = {},
   note      = {AI Alignment Track}
 }
 ```
