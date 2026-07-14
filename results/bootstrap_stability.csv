@@ -1,0 +1,19 @@
+domain,regime,boundary_dist,stability_percent
+Advertising,Direction-Driven,0.160,98.5
+Fiction,Direction-Driven,0.158,90.3
+Subjective,Context-Driven,0.058,77.7
+Indexical Error Identity,Context-Driven,0.094,88.0
+Myths and Fairytales,Context-Driven,0.093,88.9
+Religion,Context-Driven,0.095,87.1
+Stereotypes,Context-Driven,0.104,90.6
+Misconceptions,Circuit Failure,0.091,76.8
+Paranormal,Circuit Failure,0.073,80.4
+Nutrition,Circuit Failure,0.056,92.5
+Conspiracies,Circuit Failure,0.036,97.0
+Logical Falsehood,Circuit Failure,0.009,98.8
+Distraction,Direction-Driven,0.045,59.0
+Indexical Error Time,Context-Driven,0.022,58.4
+Indexical Error Location,Context-Driven,0.042,69.2
+Superstitions,Circuit Failure,0.059,28.2
+Education,Circuit Failure,0.011,49.3
+Misquotations,Circuit Failure,0.011,74.9
