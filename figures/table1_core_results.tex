@@ -1,0 +1,22 @@
+
+\begin{table}[t]
+\centering
+\caption{Core CDD results on GPT-2-XL. Mean CPA~$=~0.0666$ despite probe
+accuracy~$= 91.5\%$, confirming H1 (probe-circuit misalignment).}
+\label{tab:core}
+\begin{tabular}{lc}
+\toprule
+Metric & Value \\
+\midrule
+Mean CPA (causal-probe alignment)       & 0.0666 \\
+Mean linear probe accuracy              & 91.45\% \\
+Mean CRR (rank-1 recovery)              & 23.1$\times$ \\
+Components with CRR~$\geq 0.70$         & 100\% (50/50) \\
+Mean effective rank ($\tau = 0.80$)     & 57.74 \\
+Circuit specificity ratio               & 35.9$\times$ \\
+Circuit ablation drop                   & 546\% \\
+Regime separation (Mann-Whitney $p$)    & 0.0103 \\
+Context-Driven paradox ($r$, $p$)       & $-0.781$ ($p=0.038$) \\
+\bottomrule
+\end{tabular}
+\end{table}

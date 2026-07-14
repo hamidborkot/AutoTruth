@@ -1,0 +1,33 @@
+
+\begin{table}[t]
+\centering
+\caption{Ablation study. (A) CPA stable across circuit sizes $K=10$--$100$ (range~$=0.0888$).
+(B) cPCA direction source necessary: mean-diff baseline CPA~$=0.4138$ is dominated by surface shifts.
+(C) CPA stable across six orders of probe regularisation (range~$=0.0054$).}
+\label{tab:ablation}
+\begin{tabular}{lccc}
+\toprule
+Condition & Mean CPA & & Note \\
+\midrule
+\multicolumn{4}{l}{\textit{(A) Circuit size $K$ sensitivity}} \\
+$K=10$ & 0.0330 $\pm$ 0.0134 & 262.2$\times$ & -- \\
+$K=25$ & 0.0598 $\pm$ 0.0781 & 247.3$\times$ & -- \\
+$K=50$ & 0.0666 $\pm$ 0.0130 & 35.9$\times$ & \textbf{Main}~\checkmark \\
+$K=75$ & 0.1218 $\pm$ 0.1440 & 1831.1$\times$ & -- \\
+$K=100$ & 0.1218 $\pm$ 0.1440 & 359.8$\times$ & -- \\
+\midrule
+\multicolumn{4}{l}{\textit{(B) Stage 2 direction source}} \\
+cPCA — Stage 2 (full method) & 0.0666 $\pm$ 0.0130 & \textbf{Full method}~\checkmark \\
+Mean-difference direction & 0.4138 $\pm$ 0.2140 & -- \\
+Random unit vector (null) & 0.0199 $\pm$ 0.0020 & -- \\
+\midrule
+\multicolumn{4}{l}{\textit{(C) Probe regularisation $C$}} \\
+$C=0.01$ & 0.0720 $\pm$ 0.0170 & -- \\
+$C=0.1$ & 0.0690 $\pm$ 0.0140 & -- \\
+$C=1.0$ & 0.0672 $\pm$ 0.0130 & -- \\
+$C=10.0$ & 0.0668 $\pm$ 0.0130 & -- \\
+$C=100.0$ & 0.0666 $\pm$ 0.0130 & \textbf{Main}~\checkmark \\
+$C=1000.0$ & 0.0666 $\pm$ 0.0130 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}

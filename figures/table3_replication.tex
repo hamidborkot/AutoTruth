@@ -1,0 +1,17 @@
+
+\begin{table}[t]
+\centering
+\caption{Cross-model and cross-dataset replication. H1 (mean CPA~$<0.15$) confirmed
+across all conditions. Null expectation~$= \sqrt{2/\pi d} = 0.0199$ (Proposition~2).}
+\label{tab:replication}
+\begin{tabular}{llllcc}
+\toprule
+Model & Dataset & Architecture & Mean CPA & vs Null & H1 \\
+\midrule
+GPT-2-XL & TruthfulQA & 48L / 25H & 0.0666 & 3.3$\times$ & \checkmark \\
+Pythia-1.4B & TruthfulQA & 24L / 16H & 0.1005 & 5.0$\times$ & \checkmark \\
+GPT-2-XL & CREAK & 48L / 25H & 0.0148 & 0.7$\times$ & \checkmark \\
+Pythia-410M & TruthfulQA & 24L / 16H & 0.0473 & 2.4$\times$ & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
